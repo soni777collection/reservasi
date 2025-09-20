@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Undangan Digital</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Great+Vibes&family=Dancing+Script&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Playfair Display', Georgia, serif;
+      background: #ffe5d9;
+      max-width: 480px;
+      margin: auto;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    section { 
+      padding: 28px 20px; 
+      text-align: center; 
+    }
+	
+	/* ===== BULATAN PEACH JATUH ===== */
+	.falling-flowers {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none; /* biar gak ganggu klik */
+	overflow: hidden;
+	z-index: 9999;
+	}
+
+	.flower {
+	position: absolute;
+	top: -10%;
+	width: 12px;
+	height: 12px;
+	background: rgba(255, 182, 193, 0.6); /* pink soft muda transparan */
+	border-radius: 50%; /* bulat */
+	animation: fall linear forwards;
+	}
+
+	@keyframes fall {
+	0% {
+    transform: translateY(-10%) scale(1);
+    opacity: 0.8;
+	}
+	100% {
+    transform: translateY(110vh) scale(0.8);
+    opacity: 0;
+	}
+	}
+	
+	
+	
+  /* ===== HERO ===== */
+.hero {
+  background: url('BackHero.png') no-repeat center top;
+  background-size: contain;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 200px;
+  align-items: center;
+  text-align: center;
+}
+
+.hero h1 { font-size: 36px; margin: 6px 0; font-weight: 400; font-family: 'Dancing Script', cursive; }
+.hero h2 { font-size: 26px; margin: 6px 0; font-weight: 600; }
+.hero h3 { font-size: 36px; margin: 6px 0; font-family: 'Dancing Script', cursive; }
+.hero h4 { font-size: 24px; margin: 6px 0; font-weight: 600; }
+.hero h5 { font-size: 16px; margin-top: 12px; }
+
+/* Warna per baris di HERO */
+.hero .line1 { color: #C08060; } 
+.hero .line2 { color: #000000; } 
+.hero .line3 { color: #C08060; }
+.hero .line4 { color: #000000; }
+.hero .line5 { color: #C08060; }
+.hero .line6 { color: #000000; }
+	
+
+
+    /* Foto Background */
+    .foto-pasangan img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: 12px;
+      margin: 12px auto;
+      display: block;
+    }
+
+    /* ===== PROFIL ===== */
+    .profil {
+      background: url('ortupengantin.png') no-repeat center top;
+      background-size: contain;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding-top: 300px;
+      align-items: center;
+    }
+    .profil h2 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 36px;
+      font-weight: normal;
+      margin: 10px 0;
+      color: #C08060;
+    }
+    .profil p {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 400;
+      margin: 5px 0;
+      color: #444;
+    }
+
+    /* ===== ANIMASI ROLLING ===== */
+    @keyframes rolling {
+      0% { opacity: 0; transform: rotateX(-90deg) scale(0.8); }
+      100% { opacity: 1; transform: rotateX(0) scale(1); }
+    }
+
+    .hero h1, .hero h2, .hero h3, .hero h4, .hero h5,
+    .profil h2, .profil p {
+      opacity: 0;
+      transform: rotateX(-90deg) scale(0.8);
+    }
+    .hero.show h1, .hero.show h2, .hero.show h3, 
+    .hero.show h4, .hero.show h5,
+    .profil.show h2, .profil.show p {
+      animation: rolling 1s ease forwards;
+    }
+
+    /* Delay Hero */
+    .hero.show h1 { animation-delay: 0s; }
+    .hero.show h2 { animation-delay: 0.2s; }
+    .hero.show h3:first-of-type { animation-delay: 0.4s; }
+    .hero.show h4 { animation-delay: 0.6s; }
+    .hero.show h3:last-of-type { animation-delay: 0.8s; }
+    .hero.show h5 { animation-delay: 1s; }
+
+    /* Delay Profil */
+    .profil.show h2:nth-of-type(1) { animation-delay: 0s; }
+    .profil.show p:nth-of-type(1)  { animation-delay: 0.2s; }
+    .profil.show h2:nth-of-type(2) { animation-delay: 0.4s; }
+    .profil.show h2:nth-of-type(3) { animation-delay: 0.6s; }
+    .profil.show p:nth-of-type(2)  { animation-delay: 0.8s; }
+    .profil.show p:nth-of-type(3)  { animation-delay: 1s; }
+
+	/* ===== GALERI ===== */
+	.gallery-title {
+	  font-family: 'Dancing Script', cursive;
+	  font-size: 26px;
+	  font-weight: 600;
+	  text-align: center;
+	  margin-bottom: 16px;
+	  color: #C08060;
+	}
+
+    .gallery-wrapper {
+      position: relative;
+      margin: 20px auto;
+      width: 100%;
+      overflow: hidden;
+      max-width: 480px;
+    }
+    .gallery {
+      display: flex;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      gap: 12px;
+      padding: 10px;
+    }
+    .gallery::-webkit-scrollbar { display: none; }
+
+    .gallery img {
+      flex: 0 0 auto;
+      width: 70%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+
+    .gallery-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #C08060;
+      color: white;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 10;
+      font-size: 20px;
+    }
+    .gallery-btn.left { left: 8px; }
+    .gallery-btn.right { right: 8px; }
+    .gallery-btn:hover { background: #C08060;  }
+
+    /* ===== VIDEO ===== */
+    .video {
+      margin: 24px auto;
+      background: #fff;
+      border-radius: 16px;
+      padding: 16px;
+      width: 92%;
+      box-sizing: border-box;
+    }
+    .video h2 { font-size: 22px; margin-bottom: 12px; }
+    .video video { width: 100%; border-radius: 12px; }
+
+    /* ===== ACARA ===== */
+    .event-bg-matrimony {
+      background: url('holymatrimony.png') no-repeat center center;
+      background-size: cover;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .event-bg-recepcion {
+      background: url('recepcion.png') no-repeat center center;
+      background-size: cover;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .event-bg-matrimony h2,
+    .event-bg-recepcion h2 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 36px;
+      margin-bottom: 12px;
+      color: #C08060;
+    }
+    .event-bg-matrimony p,
+    .event-bg-recepcion p {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      margin: 6px 0;
+      color: #333;
+    }
+
+    /* Warna Tombol seragam */
+    .btn-map {
+      display: inline-block;
+      padding: 10px 24px;
+      background: #C08060;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      margin-top: 16px;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+      transition: background 0.3s ease;
+    }
+    .btn-map:hover { background: #C08060; }
+	
+	
+	.countdown {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  margin: 20px auto;
+  width: 92%;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+.countdown h2 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 28px;
+  color: #C08060;
+  margin-bottom: 12px;
+}
+.timer {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+.timer div {
+  background: #C08060;
+  color: #fff;
+  padding: 12px;
+  border-radius: 10px;
+  min-width: 60px;
+}
+.timer span {
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+}
+.timer small {
+  font-size: 12px;
+}
+.btn-calendar {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 10px 20px;
+  background: #C08060;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+.btn-calendar:hover { background: #008000; }
+	
+	
+
+    /* ===== RESERVASI ===== */
+    .form-section {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px;
+      margin: 20px auto;
+      width: 92%;
+    }
+    .form-section h2,
+    .form-section label,
+    .form-section input,
+    .form-section textarea,
+    .form-section button {
+      font-family: 'Playfair Display', serif;
+      color: #C08060;
+    }
+    .form-section h2 { font-size: 22px; margin-bottom: 16px; }
+    .form-section input, .form-section textarea {
+      width: 100%; padding: 10px; margin: 8px 0;
+      border-radius: 8px; border: 1px solid #ccc;
+      font-size: 14px; box-sizing: border-box;
+    }
+    .form-section label { font-size: 14px; margin-right: 12px; }
+    .form-section button {
+      padding: 10px 24px;
+      background: #C08060;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 12px;
+      font-size: 15px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+      transition: background 0.3s ease;
+    }
+    .form-section button:hover { background: #008000; }
+
+    /* Gift */
+    .gift {
+      background: #fff;
+      padding: 20px;
+      border-radius: 16px;
+      margin: 20px auto 40px;
+      width: 92%;
+    }
+    .gift h2 { font-size: 22px; margin-bottom: 12px; }
+    .gift img { max-width: 120px; margin: 10px 0; }
+
+    /* Animasi fade-in */
+    .reveal { opacity: 0; transform: translateY(30px) scale(0.98); transition: all 1s ease; }
+    .reveal.show { opacity: 1; transform: translateY(0) scale(1); }
+
+    /* Animasi zoom */
+    .zoom-reveal { opacity: 0; transform: scale(0.8); transition: all 1s ease; }
+    .zoom-reveal.show { opacity: 1; transform: scale(1); }
+    .zoom-top { transform: translateY(-50px) scale(0.8); }
+    .zoom-bottom { transform: translateY(50px) scale(0.8); }
+    .zoom-left { transform: translateX(-50px) scale(0.8); }
+    .zoom-right { transform: translateX(50px) scale(0.8); }
+    .zoom-top.show, .zoom-bottom.show, .zoom-left.show, .zoom-right.show {
+      transform: translate(0,0) scale(1);
+    }
+  </style>
+</head>
+<body>
+
+	<div class="falling-flowers"></div>
+
+   <!-- Hero -->
+  <section class="hero reveal">
+  <h1 class="line1">Invitation</h1>
+  <h2 class="line2">The Wedding Of</h2>
+  <h3 class="line3">Max Zhang</h3>
+  <h4 class="line4">&</h4>
+  <h3 class="line5">Shwan Garcia</h3>
+  <h5 class="line6">20 Mei 2026</h5>
+</section>
+
+  <!-- Foto pasangan -->
+  <section class="foto-pasangan zoom-reveal zoom-bottom">
+    <img src="Background1.png" alt="Foto Pasangan">
+  </section>
+
+  <!-- Profil -->
+  <section class="profil reveal">
+    <h2>Max Zhang</h2>
+    <p>Son of Mr./Mrs. Zhang</p>
+    <h2>&</h2>
+    <h2>Shwan Garcia</h2>
+    <p>Daughter of Mr./Mrs. Garcia</p>
+    <p>20 Mei 2026</p>
+  </section>
+
+  <!-- Galeri -->
+  <section class="gallery-wrapper zoom-reveal zoom-left">
+    <h2 class="gallery-title">Special Moment</h2>
+    <button class="gallery-btn left" onclick="scrollGallery(-1)">&#10094;</button>
+    <div class="gallery" id="gallery">
+      <img src="foto1.jpg" alt="">
+      <img src="foto2.jpg" alt="">
+      <img src="foto3.jpg" alt="">
+      <img src="foto4.jpg" alt="">
+    </div>
+    <button class="gallery-btn right" onclick="scrollGallery(1)">&#10095;</button>
+  </section>
+
+  <!-- Video -->
+  <section class="video zoom-reveal zoom-right">
+    <h2>Video Kenangan</h2>
+    <video controls>
+      <source src="video.mp4" type="video/mp4">
+    </video>
+  </section>
+
+  <!-- Acara -->
+  <section class="event-bg-matrimony zoom-reveal zoom-top">
+    <h2>Holy Matrimony</h2>
+    <p>St. Yosef Church<br>Hassandudin street, Kediri</p>
+    <p>10:00 AM – 20 Mei 2026</p>
+    <a href="https://maps.app.goo.gl/qvC6TPt6BTPUeQmp6" class="btn-map">BUKA PETA</a>
+  </section>
+
+  <section class="event-bg-recepcion zoom-reveal zoom-bottom">
+    <h2>Reception</h2>
+    <p>Panglima Resto<br>Panglima Polim Street, Kediri</p>
+    <p>13:00 AM – 20 Mei 2026</p>
+    <a href="https://maps.app.goo.gl/Wmw9HDVtjDRHszVk6" class="btn-map">BUKA PETA</a>
+  </section>
+
+<!-- Countdown -->
+<section class="countdown zoom-reveal zoom-top">
+  <h2>Hitung Mundur Menuju Acara</h2>
+  <div class="timer">
+    <div><span id="days">0</span><small>Hari</small></div>
+    <div><span id="hours">0</span><small>Jam</small></div>
+    <div><span id="minutes">0</span><small>Menit</small></div>
+    <div><span id="seconds">0</span><small>Detik</small></div>
+  </div>
+  <a id="add-calendar" class="btn-calendar" href="#">📅 Simpan ke Kalender</a>
+  <a id="google-calendar" class="btn-calendar" href="#" target="_blank">🌐 Tambah ke Google Calendar</a>
+</section>
+
+
+  <!-- === FORM RESERVASI === -->
+<section class="form-section zoom-reveal zoom-left">
+  <h2>Reservasi & Pesan</h2>
+  <form id="reservasiForm">
+    <input type="text" name="nama" placeholder="Nama Anda" required>
+    <textarea name="pesan" rows="4" placeholder="Pesan atau Kesan..." required></textarea><br>
+
+    <label>
+      <input type="radio" name="hadir" value="Hadir" required> Hadir
+    </label>
+    <label>
+      <input type="radio" name="hadir" value="Tidak Hadir"> Tidak Hadir
+    </label><br>
+
+    <button type="submit">Kirim</button>
+  </form>
+  <div id="status"></div>
+</section>
+
+  <!-- Gift -->
+  <section class="gift zoom-reveal zoom-right">
+    <h2>Wedding Gift</h2>
+    <img src="weddinggift.png" alt="BCA Logo"><br>
+    <p>033xxxxx<br>a/n Shwan Garcia</p>
+  </section>
+
+  <!-- Musik -->
+  <audio id="bg-music" loop>
+    <source src="weddingday1.mp3" type="audio/mpeg">
+  </audio>
+
+<script>
+	const eventDate = new Date("2026-05-20T10:00:00"); // Acara mulai
+	const reveals = document.querySelectorAll('.reveal, .zoom-reveal');
+	const bgMusic = document.getElementById("bg-music");
+	let firstPlay = false;
+
+
+	// Efek bulatan peach jatuh
+	function createFlower() {
+	const flower = document.createElement("div");
+	flower.classList.add("flower");
+  
+	// posisi horizontal acak
+	flower.style.left = Math.random() * 100 + "vw"; 
+  
+	// durasi animasi acak (5–10 detik)
+	flower.style.animationDuration = (5 + Math.random() * 5) + "s"; 
+  
+	// ukuran acak (8–18 px)
+	const size = 8 + Math.random() * 10;
+	flower.style.width = size + "px";
+	flower.style.height = size + "px";
+  
+	document.querySelector(".falling-flowers").appendChild(flower);
+  
+	// hapus setelah jatuh
+	setTimeout(() => {
+    flower.remove();
+	}, 12000);
+	}
+
+	// jalankan terus tiap 500ms
+	setInterval(createFlower, 500);
+
+
+  function enableMusic() {
+    if (!firstPlay) {
+      bgMusic.play().catch(err => console.log("Autoplay diblokir:", err));
+      firstPlay = true;
+    }
+  }
+  document.addEventListener("click", enableMusic);
+  document.addEventListener("scroll", enableMusic);
+
+  function checkScroll() {
+    let triggerBottom = window.innerHeight * 0.85;
+    let triggerTop = window.innerHeight * 0.15;
+    reveals.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < triggerBottom && rect.bottom > triggerTop) {
+        el.classList.add('show');
+      } else {
+        el.classList.remove('show');
+      }
+    });
+  }
+  window.addEventListener('scroll', checkScroll);
+  window.addEventListener('resize', checkScroll);
+  document.addEventListener('DOMContentLoaded', checkScroll);
+
+  // Scroll galeri manual
+  function scrollGallery(direction) {
+    const gallery = document.getElementById("gallery");
+    const scrollAmount = gallery.clientWidth * 0.8;
+    gallery.scrollBy({ left: direction * scrollAmount, behavior: "smooth" });
+  }
+  
+  function updateCountdown() {
+  const now = new Date();
+  const diff = eventDate - now;
+
+  if (diff <= 0) {
+    document.querySelector(".timer").innerHTML = "<h3>Acara Sedang Berlangsung 🎉</h3>";
+    return;
+  }
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+
+  document.getElementById("days").textContent = days;
+  document.getElementById("hours").textContent = hours;
+  document.getElementById("minutes").textContent = minutes;
+  document.getElementById("seconds").textContent = seconds;
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+// ========== EXPORT KE KALENDER ==========
+document.getElementById("add-calendar").addEventListener("click", function (e) {
+  e.preventDefault();
+
+  const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+SUMMARY:Resepsi Pernikahan Max & Shwan
+DTSTART:20260520T030000Z
+DTEND:20260520T070000Z
+LOCATION:Panglima Resto, Kediri
+DESCRIPTION:Undangan Pernikahan Max Zhang & Shwan Garcia
+END:VEVENT
+END:VCALENDAR`;
+
+  const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "Wedding-Max-Shwan.ics";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+});
+  
+  
+// ========== GOOGLE CALENDAR ==========
+
+document.getElementById("google-calendar").addEventListener("click", function (e) {
+  e.preventDefault();
+
+  const title = "Resepsi Pernikahan Max & Shwan";
+  const details = "Undangan Pernikahan Max Zhang & Shwan Garcia";
+  const location = "Panglima Resto, Panglima Polim Street, Kediri";
+
+  // Format waktu untuk Google Calendar: YYYYMMDDTHHMMSSZ (UTC)
+  const start = "20260520T030000Z"; // 20 Mei 2026, 10:00 WIB = 03:00 UTC
+  const end   = "20260520T070000Z"; // 20 Mei 2026, 14:00 WIB = 07:00 UTC
+
+  const url =
+    "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+    "&text=" + encodeURIComponent(title) +
+    "&details=" + encodeURIComponent(details) +
+    "&location=" + encodeURIComponent(location) +
+    "&dates=" + start + "/" + end;
+
+  window.open(url, "_blank");
+});
+
+
+// === Ganti dengan URL Web App hasil deploy Google Apps Script ===
+  const scriptURL = "https://script.google.com/macros/s/AKfycbwv7Bg1M5EZmGoSgw4BM_Na4IvpahYzjLlv3RVof301F0Nx--PUtrrJopNoPofK-2pRtA/exec";
+
+  const form = document.getElementById("reservasiForm");
+  const statusDiv = document.getElementById("status");
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    // Ambil data dari form
+    let formData = new FormData(form);
+    let data = {};
+    formData.forEach((value, key) => (data[key] = value));
+
+    // Tampilkan loading
+    statusDiv.innerHTML = "<p style='color:blue'>⏳ Mengirim data...</p>";
+
+    try {
+      const res = await fetch(scriptURL, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const response = await res.json();
+
+      if (response.result === "success") {
+        statusDiv.innerHTML =
+          "<p style='color:green'>✅ Reservasi berhasil terkirim!</p>";
+        form.reset();
+      } else {
+        statusDiv.innerHTML =
+          "<p style='color:red'>❌ " + response.message + "</p>";
+      }
+    } catch (error) {
+      statusDiv.innerHTML =
+        "<p style='color:red'>⚠️ Gagal menghubungi server!</p>";
+      console.error("Error:", error);
+    }
+  });
+ 
+ 
+ 
+</script>
+</body>
+</html>
+
+
