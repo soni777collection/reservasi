@@ -388,8 +388,9 @@
     .zoom-right { transform: translateX(50px) scale(0.8); }
     .zoom-top.show, .zoom-bottom.show, .zoom-left.show, .zoom-right.show {
       transform: translate(0,0) scale(1);
-
-/* RESPONSIVE DESIGN */
+    
+	
+	/* RESPONSIVE DESIGN */
 /* HP kecil */
 @media (max-width: 480px) {
   .hero {
@@ -442,7 +443,11 @@
 
   .gallery img { width: 30%; }
 	
-    }
+	
+	
+	
+	
+	}
   </style>
 </head>
 <body>
@@ -524,7 +529,7 @@
 </section>
 
 
-  <!-- === FORM RESERVASI === -->
+<!-- === FORM RESERVASI === -->
 <section class="form-section zoom-reveal zoom-left">
   <h2>Reservasi & Pesan</h2>
   <form id="reservasiForm">
@@ -532,16 +537,17 @@
     <textarea name="pesan" rows="4" placeholder="Pesan atau Kesan..." required></textarea><br>
 
     <label>
-      <input type="radio" name="hadir" value="Hadir" required> Hadir
+      <input type="radio" name="kehadiran" value="Hadir" required> Hadir
     </label>
     <label>
-      <input type="radio" name="hadir" value="Tidak Hadir"> Tidak Hadir
+      <input type="radio" name="kehadiran" value="Tidak Hadir"> Tidak Hadir
     </label><br>
 
     <button type="submit">Kirim</button>
   </form>
   <div id="status"></div>
 </section>
+
 
   <!-- Gift -->
   <section class="gift zoom-reveal zoom-right">
@@ -554,6 +560,9 @@
   <audio id="bg-music" loop>
     <source src="weddingday1.mp3" type="audio/mpeg">
   </audio>
+
+<!-- Tambahan status -->
+<div id="status"></div>
 
 <script>
 	const eventDate = new Date("2026-05-20T10:00:00"); // Acara mulai
@@ -695,54 +704,65 @@ document.getElementById("google-calendar").addEventListener("click", function (e
 });
 
 
-// === Ganti dengan URL Web App hasil deploy Google Apps Script ===
-  const scriptURL = "https://script.google.com/macros/s/AKfycbwv7Bg1M5EZmGoSgw4BM_Na4IvpahYzjLlv3RVof301F0Nx--PUtrrJopNoPofK-2pRtA/exec";
+ // === Ganti dengan URL Web App hasil deploy Google Apps Script ===
+ document.getElementById("reservasiForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  let formData = {
+    nama: this.nama.value,
+    pesan: this.pesan.value,
+    kehadiran: this.kehadiran.value
+  };
 
-  const form = document.getElementById("reservasiForm");
-  const statusDiv = document.getElementById("status");
-
-  form.addEventListener("submit", async function (e) {
-    e.preventDefault();
-
-    // Ambil data dari form
-    let formData = new FormData(form);
-    let data = {};
-    formData.forEach((value, key) => (data[key] = value));
-
-    // Tampilkan loading
-    statusDiv.innerHTML = "<p style='color:blue'>⏳ Mengirim data...</p>";
-
-    try {
-      const res = await fetch(scriptURL, {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      const response = await res.json();
-
-      if (response.result === "success") {
-        statusDiv.innerHTML =
-          "<p style='color:green'>✅ Reservasi berhasil terkirim!</p>";
-        form.reset();
-      } else {
-        statusDiv.innerHTML =
-          "<p style='color:red'>❌ " + response.message + "</p>";
-      }
-    } catch (error) {
-      statusDiv.innerHTML =
-        "<p style='color:red'>⚠️ Gagal menghubungi server!</p>";
-      console.error("Error:", error);
-    }
+  fetch("https://script.google.com/macros/s/AKfycbwv7Bg1M5EZmGoSgw4BM_Na4IvpahYzjLlv3RVof301F0Nx--PUtrrJopNoPofK-2pRtA/exec", {
+    method: "POST",
+    mode: "no-cors", // 🔑 FIX CORS
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(formData)
+  })
+  .then(() => {
+    alert("✅ Reservasi berhasil dikirim!");
+    this.reset();
+  })
+  .catch(err => {
+    alert("⚠️ Gagal mengirim: " + err);
   });
+});
  
- 
+// === Notifikasi data terkirim ===
+
+document.getElementById("reservasiForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  let form = this;
+  let statusDiv = document.getElementById("status");
+
+  let formData = {
+    nama: form.nama.value,
+    pesan: form.pesan.value,
+    kehadiran: form.kehadiran.value
+  };
+
+  // Status loading
+  statusDiv.innerHTML = "<p style='color:blue'>⏳ Mengirim data...</p>";
+
+  fetch("https://script.google.com/macros/s/AKfycb.../exec", {
+    method: "POST",
+    mode: "no-cors", 
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(formData)
+  })
+  .then(() => {
+    statusDiv.innerHTML = "<p style='color:green'>✅ Reservasi berhasil dikirim!</p>";
+    form.reset();
+  })
+  .catch(err => {
+    statusDiv.innerHTML = "<p style='color:red'>❌ Gagal mengirim: " + err + "</p>";
+  });
+});
  
 </script>
 </body>
 </html>
 
 
-
+ 
