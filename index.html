@@ -388,6 +388,60 @@
     .zoom-right { transform: translateX(50px) scale(0.8); }
     .zoom-top.show, .zoom-bottom.show, .zoom-left.show, .zoom-right.show {
       transform: translate(0,0) scale(1);
+
+/* RESPONSIVE DESIGN */
+/* HP kecil */
+@media (max-width: 480px) {
+  .hero {
+    padding-top: 120px;
+    background-size: contain;
+  }
+  .hero h1 { font-size: 1.8rem; }
+  .hero h2 { font-size: 1.3rem; }
+  .hero h3 { font-size: 1.6rem; }
+  .hero h4 { font-size: 1.2rem; }
+  .hero h5 { font-size: 0.9rem; }
+
+  .profil {
+    padding-top: 180px;
+  }
+  .profil h2 { font-size: 1.6rem; }
+  .profil p { font-size: 0.9rem; }
+
+  .gallery img {
+    width: 85%;
+    max-width: 260px;
+  }
+  .video h2 { font-size: 1.3rem; }
+  .event-bg-matrimony h2,
+  .event-bg-recepcion h2 { font-size: 1.6rem; }
+  .countdown h2 { font-size: 1.4rem; }
+  .timer div { min-width: 45px; padding: 8px; }
+}
+
+/* Tablet */
+@media (min-width: 481px) and (max-width: 768px) {
+  .hero h1 { font-size: 2rem; }
+  .hero h2 { font-size: 1.4rem; }
+  .gallery img { width: 60%; }
+  .profil h2 { font-size: 1.8rem; }
+}
+
+/* Desktop lebar */
+@media (min-width: 769px) {
+  .hero { padding-top: 180px; }
+  .hero h1 { font-size: 3rem; }
+  .hero h2 { font-size: 2rem; }
+  .hero h3 { font-size: 2.4rem; }
+  .hero h4 { font-size: 1.8rem; }
+  .hero h5 { font-size: 1.2rem; }
+
+  .profil { padding-top: 300px; }
+  .profil h2 { font-size: 2.2rem; }
+  .profil p { font-size: 1.1rem; }
+
+  .gallery img { width: 30%; }
+	
     }
   </style>
 </head>
@@ -689,5 +743,6 @@ document.getElementById("google-calendar").addEventListener("click", function (e
 </script>
 </body>
 </html>
+
 
 
