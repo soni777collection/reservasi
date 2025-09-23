@@ -25,14 +25,65 @@
     }
 
 	/* === RESPONSIVE DESIGN === */
-/* Mobile (≤480px) */
+/* === PENGATURAN TAMBAHAN UNTUK MOBILE HP (≤480px) === */
 @media (max-width: 480px) {
+  body {
+    font-size: 16px; /* ukuran teks dasar lebih kecil */
+  }
+
   .hero {
-    padding-top: 160px;   /* sesuaikan agar teks turun ke posisi pas */
+    padding-top: 140px; /* atur tinggi awal hero agar teks pas */
     text-align: center;
   }
-  .hero h1, .hero h2, .hero h3, .hero h4, .hero h5 {
-    margin: 8px 0;        /* rapikan jarak antar teks */
+
+  .hero h1 {
+    font-size: 30px;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+
+  .hero h2 {
+    font-size: 22px;
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+
+  .hero h3 {
+    font-size: 26px;
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+
+  .hero h4 {
+    font-size: 18px;
+    margin-bottom: 4px;
+    line-height: 1.2;
+  }
+
+  .hero h5 {
+    font-size: 14px;
+    margin-bottom: 4px;
+    line-height: 1.2;
+  }
+
+  /* Supaya gambar di gallery/section lain tidak terlalu besar di HP */
+  .gallery img {
+    width: 90%;
+    margin-bottom: 10px;
+  }
+
+  /* Video, form, gift, countdown biar pas di HP */
+  .video,
+  .form-section,
+  .gift,
+  .countdown {
+    width: 95%;
+  }
+
+  /* Tombol gallery biar nyaman di-klik di HP */
+  .gallery-btn {
+    font-size: 18px;
+    padding: 10px 14px;
   }
 }
 
@@ -832,6 +883,7 @@ document.getElementById("reservasiForm").addEventListener("submit", function(e) 
 
 
  
+
 
 
 
