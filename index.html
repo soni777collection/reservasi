@@ -23,7 +23,63 @@
       padding: 28px 20px; 
       text-align: center; 
     }
-	
+
+	/* === RESPONSIVE DESIGN === */
+
+/* Tablet (481px – 480px) */
+@media (min-width: 481px) and (max-width: 480px) {
+  body {
+    max-width: 480px;
+    font-size: 18px;
+  }
+  .hero h1 { font-size: 48px; }
+  .hero h2 { font-size: 32px; }
+  .hero h3 { font-size: 44px; }
+  .hero h4 { font-size: 28px; }
+  .hero h5 { font-size: 20px; }
+
+  .gallery img {
+    width: 40%;
+  }
+
+  .video, .form-section, .gift, .countdown {
+    width: 80%;
+  }
+}
+
+/* Desktop (≥ 480px) */
+@media (min-width: 720px) {
+  body {
+    max-width: 480px;
+    font-size: 20px;
+  }
+  section {
+    padding: 40px;
+  }
+  .hero {
+    padding-top: 240px;
+    background-size: cover;
+  }
+  .hero h1 { font-size: 56px; }
+  .hero h2 { font-size: 38px; }
+  .hero h3 { font-size: 52px; }
+  .hero h4 { font-size: 32px; }
+  .hero h5 { font-size: 24px; }
+
+  .gallery img {
+    width: 28%;
+  }
+
+  .video, .form-section, .gift, .countdown {
+    width: 70%;
+  }
+
+  .gallery-btn { font-size: 28px; padding: 14px 18px; }
+}
+
+
+
+	  
 	/* ===== BULATAN PEACH JATUH ===== */
 	.falling-flowers {
 	position: fixed;
@@ -766,3 +822,4 @@ document.getElementById("reservasiForm").addEventListener("submit", function(e) 
 
 
  
+
